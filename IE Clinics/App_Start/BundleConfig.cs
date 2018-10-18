@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace IE_Clinics
 {
@@ -9,22 +8,51 @@ namespace IE_Clinics
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/Start/jquery.min.js",
+                        "~/Scripts/Start/popper.js",
+                        "~/Scripts/Start/jquery.blockui.min.js",
+                        "~/Scripts/Start/jquery.slimscroll.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/datatable").Include(
+                        "~/Scripts/DataTable/jquery.dataTables.min.js",
+                        "~/Scripts/DataTable/dataTables.bootstrap4.min.js",
+                        "~/Scripts/DataTable/table_data.js"
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/common").IncludeDirectory(
+                        "~/Scripts/Common", "*.js", false
+                        ));
+
+            bundles.Add(new ScriptBundle("~/bundles/material").Include(
+                        "~/Scripts/material.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-switch.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/simple-line-icons.min.css",
+                "~/Content/font-awesome.min.css",
+                "~/Content/bootstrap.min.css",
+                "~/Content/DataTable/dataTables.bootstrap4.min.css",
+                "~/Content/Material/material.min.css",
+                "~/Content/Material/material_style.css"
+                ));
+
+            bundles.Add(new StyleBundle("~/Content/Theme-Styles").Include(
+                "~/Content/Theme/theme_style.css",
+                "~/Content/Theme/style.css",
+                "~/Content/Theme/plugins.min.css",
+                "~/Content/Theme/responsive.css",
+                "~/Content/Theme/theme-color.css"
+                ));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
