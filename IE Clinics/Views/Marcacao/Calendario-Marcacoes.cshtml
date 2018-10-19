@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Calendario de marcações";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <header class="panel-heading panel-heading-blue">
+                Marcações
+            </header>
+            <div class="panel-body">
+                <div id="calendario" class="has-toolbar"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header panel-heading-blue">
+                <h4 class="modal-title" id="exampleModalLongTitle">Dados da marcação</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="fa fa-close"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><b>Paciente:</b> <span id="paciente"></span></p>
+                <p><b>Tipo de marcação:</b> <span id="tipoMarcacao"></span></p>
+                <p><b>Especialidade:</b> <span id="especialidade"></span></p>
+                <p><b>Data:</b> <span id="data"></span></p>
+                <p><b>Hora:</b> <span id="hora"></span></p>
+                <p><b>Médico:</b> <span id="medico"></span></p>
+                <p><b>Observações: </b><span id="obs"></span></p>
+            </div>
+            <div class="modal-footer bg-blue">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/fullcalendar");
+}
+

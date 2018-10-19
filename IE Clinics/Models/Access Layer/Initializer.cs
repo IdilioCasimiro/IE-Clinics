@@ -1,14 +1,11 @@
 ﻿using IE_Clinics.Models.Dominio;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 
 namespace IE_Clinics.Models.Access_Layer
 {
-    public class Initializer : DropCreateDatabaseIfModelChanges<Contexto>
+    public class Initializer : CreateDatabaseIfNotExists<Contexto>
     {
         CultureInfo cultureInfo = new CultureInfo("pt-AO");
         //O método seed vai carregar dados na BD sempre que esta for criada
@@ -16,11 +13,9 @@ namespace IE_Clinics.Models.Access_Layer
         {
             Paciente paciente = new Paciente()
             {
-                PrimeiroNome = "Idílio",
-                UltimoNome = "Casimiro",
+                Nome = "Idílio Casimiro",
                 DataNascimento = DateTime.Parse("23/07/1996", cultureInfo),
                 Sexo = Sexo.M,
-                Profissao = "Programador",
                 Pais = "Angola",
                 Provincia = "Luanda",
                 Endereco = "Rua 12 de Julho",

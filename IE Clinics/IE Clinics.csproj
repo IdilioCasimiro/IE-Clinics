@@ -195,16 +195,58 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Dominio\EspecialidadeController.cs" />
+    <Compile Include="Controllers\Dominio\MarcacaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PacienteController.cs" />
+    <Compile Include="Controllers\Dominio\MedicoController.cs" />
+    <Compile Include="Controllers\Dominio\PacienteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810172302149_InitialCreate.cs" />
+    <Compile Include="Migrations\201810172302149_InitialCreate.Designer.cs">
+      <DependentUpon>201810172302149_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181107485_Initial.cs" />
+    <Compile Include="Migrations\201810181107485_Initial.Designer.cs">
+      <DependentUpon>201810181107485_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181215049_ModeloPacienteUpdated.cs" />
+    <Compile Include="Migrations\201810181215049_ModeloPacienteUpdated.Designer.cs">
+      <DependentUpon>201810181215049_ModeloPacienteUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181220021_ModeloPacienteUpdated1.cs" />
+    <Compile Include="Migrations\201810181220021_ModeloPacienteUpdated1.Designer.cs">
+      <DependentUpon>201810181220021_ModeloPacienteUpdated1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181437502_ModeloMedicoAdicionado.cs" />
+    <Compile Include="Migrations\201810181437502_ModeloMedicoAdicionado.Designer.cs">
+      <DependentUpon>201810181437502_ModeloMedicoAdicionado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181725509_ModelMarcacaoAdicionado.cs" />
+    <Compile Include="Migrations\201810181725509_ModelMarcacaoAdicionado.Designer.cs">
+      <DependentUpon>201810181725509_ModelMarcacaoAdicionado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181753226_MarcacaoActualizado.cs" />
+    <Compile Include="Migrations\201810181753226_MarcacaoActualizado.Designer.cs">
+      <DependentUpon>201810181753226_MarcacaoActualizado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810181837261_DropCreateDB.cs" />
+    <Compile Include="Migrations\201810181837261_DropCreateDB.Designer.cs">
+      <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Access Layer\Contexto.cs" />
     <Compile Include="Models\Access Layer\Initializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dominio\Analise.cs" />
+    <Compile Include="Models\Dominio\Especialidade.cs" />
+    <Compile Include="Models\Dominio\Marcacao.cs" />
+    <Compile Include="Models\Dominio\MarcacaoCalendario.cs" />
+    <Compile Include="Models\Dominio\Medico.cs" />
     <Compile Include="Models\Dominio\Paciente.cs" />
+    <Compile Include="Models\Dominio\Pessoa.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -216,6 +258,7 @@
     <Content Include="Content\extra_pages.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\formlayout.css" />
+    <Content Include="Content\Fullcalendar\fullcalendar.css" />
     <Content Include="Content\inbox.min.css" />
     <Content Include="Content\jquery.mCustomScrollbar.css" />
     <Content Include="Content\Material\material.min.css" />
@@ -284,6 +327,13 @@
     <Content Include="Scripts\DataTable\dataTables.bootstrap4.min.js" />
     <Content Include="Scripts\DataTable\jquery.dataTables.min.js" />
     <Content Include="Scripts\DataTable\table_data.js" />
+    <Content Include="Scripts\Fullcalendar\fullcalendar.min.js" />
+    <Content Include="Scripts\Fullcalendar\fullcalendarSettings.js" />
+    <Content Include="Scripts\Fullcalendar\jquery-ui.min.js" />
+    <Content Include="Scripts\Fullcalendar\locale-all.js" />
+    <Content Include="Scripts\Fullcalendar\moment.min.js" />
+    <Content Include="Scripts\Fullcalendar\pt.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\material.min.js" />
     <Content Include="Scripts\Start\jquery.blockui.min.js" />
     <Content Include="Scripts\Start\jquery.min.js" />
@@ -332,6 +382,49 @@
     <None Include="packages.config" />
     <Content Include="Views\Paciente\Index.cshtml" />
     <Content Include="Views\Paciente\Adicionar-Paciente.cshtml" />
+    <Content Include="Views\Especialidade\Adicionar-Especialidade.cshtml" />
+    <Content Include="Views\Especialidade\Delete.cshtml" />
+    <Content Include="Views\Especialidade\Details.cshtml" />
+    <Content Include="Views\Especialidade\Edit.cshtml" />
+    <Content Include="Views\Especialidade\Index.cshtml" />
+    <Content Include="Views\Medico\Adicionar.cshtml" />
+    <Content Include="Views\Medico\Delete.cshtml" />
+    <Content Include="Views\Medico\Details.cshtml" />
+    <Content Include="Views\Medico\Edit.cshtml" />
+    <Content Include="Views\Medico\Index.cshtml" />
+    <Content Include="Views\Marcacao\Create.cshtml" />
+    <Content Include="Views\Marcacao\Delete.cshtml" />
+    <Content Include="Views\Marcacao\Details.cshtml" />
+    <Content Include="Views\Marcacao\Edit.cshtml" />
+    <Content Include="Views\Marcacao\Index.cshtml" />
+    <Content Include="Views\Marcacao\Efectuar-Marcacao.cshtml" />
+    <Content Include="Views\Marcacao\Calendario-Marcacoes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810172302149_InitialCreate.resx">
+      <DependentUpon>201810172302149_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181107485_Initial.resx">
+      <DependentUpon>201810181107485_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181215049_ModeloPacienteUpdated.resx">
+      <DependentUpon>201810181215049_ModeloPacienteUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181220021_ModeloPacienteUpdated1.resx">
+      <DependentUpon>201810181220021_ModeloPacienteUpdated1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181437502_ModeloMedicoAdicionado.resx">
+      <DependentUpon>201810181437502_ModeloMedicoAdicionado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181725509_ModelMarcacaoAdicionado.resx">
+      <DependentUpon>201810181725509_ModelMarcacaoAdicionado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181753226_MarcacaoActualizado.resx">
+      <DependentUpon>201810181753226_MarcacaoActualizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810181837261_DropCreateDB.resx">
+      <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,7 @@
-﻿@model IEnumerable<IE_Clinics.Models.Dominio.Paciente>
+﻿@model IEnumerable<IE_Clinics.Models.Dominio.Marcacao>
+
 @{
-    ViewBag.Title = "Lista de pacientes";
+    ViewBag.Title = "Lista de marcações";
 }
 
 <div class="row">
@@ -20,61 +21,29 @@
                                     </div>
                                 </div>
                                 <div class="card-body ">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                            <div class="btn-group">
-                                                <a href="@Url.Action("Adicionar-Paciente", "Paciente", new { area = ""})" id="addRow" class="btn btn-info">
-                                                    Adicionar paciente <i class="fa fa-plus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-6 col-xs-6">
-                                                <div class="btn-group pull-right">
-                                                    <a class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">
-                                                        Tools
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu pull-right">
-                                                        <li>
-                                                            <a href="javascript:;">
-                                                                <i class="fa fa-print"></i> Print
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:;">
-                                                                <i class="fa fa-file-pdf-o"></i> Save as PDF
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:;">
-                                                                <i class="fa fa-file-excel-o"></i> Export to Excel
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                    </div>
                                     <div class="table-scrollable">
                                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                                             <thead>
                                                 <tr>
-                                                    <th> Nome </th>
-                                                    <th class="center"> Sexo </th>
-                                                    <th class="center"> D. Nascimento </th>
-                                                    <th class="center"> Endereço </th>
-                                                    <th class="center"> Telefone </th>
+                                                    <th> Paciente </th>
+                                                    <th class="center"> Tipo de marcação </th>
+                                                    <th class="center"> Especialidade </th>
+                                                    <th class="center"> Data </th>
+                                                    <th class="center"> Hora </th>
+                                                    <th class="center"> Médico </th>
                                                     <th class="center"> Opções </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var paciente in Model)
+                                                @foreach (var marcacao in Model)
                                                 {
                                                 <tr class="odd gradeX">
-                                                    <td>@paciente.Nome @paciente.Nome</td>
-                                                    <td class="center">@paciente.Sexo</td>
-                                                    <td class="center">@paciente.DataNascimento.ToShortDateString()</td>
-                                                    <td class="center">@paciente.Endereco</td>
-                                                    <td class="center">@paciente.Telefone</td>
+                                                    <td>@marcacao.Paciente.Nome</td>
+                                                    <td class="center">@marcacao.TipoMarcacao</td>
+                                                    <td class="center">@marcacao.Especialidade</td>
+                                                    <td class="center">@marcacao.Data.ToShortDateString()</td>
+                                                    <td class="center">@marcacao.Data.ToShortTimeString()</td>
+                                                    <td class="center">@marcacao.Medico.Nome</td>
                                                     <td class="center">
                                                         <div class="btn-group">
                                                             <button class="btn btn-xs btn-primary dropdown-toggle center no-margin" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -83,7 +52,7 @@
                                                             </button>
                                                             <ul class="dropdown-menu pull-left" role="menu">
                                                                 <li>
-                                                                    <a href="@Url.Action("Efectuar-Marcacao", "Marcacao", new { area = "", nome = paciente.ID,id = paciente.ID})"><i class="fa fa-clock-o"></i> Efectuar marcação </a>
+                                                                    <a href=""><i class="fa fa-clock-o"></i> Efectuar marcação </a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="javascript:;"><i class="fa fa-eye"></i> Detalhes </a>

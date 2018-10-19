@@ -35,13 +35,20 @@ namespace IE_Clinics
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/bootstrap-switch.min.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/fullcalendar").Include(
+                      "~/Scripts/Fullcalendar/moment.min.js",
+                      "~/Scripts/Fullcalendar/fullcalendar.min.js",
+                      "~/Scripts/Fullcalendar/fullcalendarSettings.js"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/simple-line-icons.min.css",
                 "~/Content/font-awesome.min.css",
                 "~/Content/bootstrap.min.css",
                 "~/Content/DataTable/dataTables.bootstrap4.min.css",
                 "~/Content/Material/material.min.css",
-                "~/Content/Material/material_style.css"
+                "~/Content/Material/material_style.css",
+                "~/Content/Fullcalendar/fullcalendar.css"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/Theme-Styles").Include(
@@ -51,6 +58,10 @@ namespace IE_Clinics
                 "~/Content/Theme/responsive.css",
                 "~/Content/Theme/theme-color.css"
                 ));
+
+            //bundles.Add(new StyleBundle("~/Content/fullcalendar").Include(
+            //    "~/Content/Fullcalendar/fullcalendar.css"
+            //    ));
 
             BundleTable.EnableOptimizations = true;
         }

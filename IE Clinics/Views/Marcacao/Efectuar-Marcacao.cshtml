@@ -1,0 +1,172 @@
+﻿@model IE_Clinics.Models.Dominio.Marcacao
+
+@{
+    ViewBag.Title = "Efectuar marcacão";
+}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="white-box border-gray">
+            <div class="user-bg">
+                <div class="overlay-box">
+                    <div class="user-content">
+                        <h4 class="text-white">Dados do paciente</h4>
+                        <h4 class="text-white">@ViewBag.Paciente.Nome</h4>
+                        <h5 class="text-white">@ViewBag.Paciente.Email</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="user-btm-box">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-primary"><i class="fa fa-phone"></i></p>
+                        <h6>Telefone</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.Telefone</b>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-success"><i class="fa fa-map"></i></p>
+                        <h6>Endereço</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.Endereco</b>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-danger"><i class="fa fa-clock-o"></i></p>
+                        <h6>Data de nascimento</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.DataNascimento.ToShortDateString()</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>Dados da marcação</header>
+                <button id="panel-button"
+                        class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                        data-upgraded=",MaterialButton">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    data-mdl-for="panel-button">
+                    <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                    <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                    <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                </ul>
+            </div>
+            <div class="card-body " id="bar-parent">
+                @using (Html.BeginForm(FormMethod.Get))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.Hidden("id", (int)ViewBag.Paciente.ID)
+                    <div class="form-group">
+                        <label for="tipoMarcacao">Tipo de marcação</label>
+                        <select class="form-control" name="TipoMarcacao" id="tipoMarcacao">
+                            <option value="Consulta">Consulta</option>
+                            <option value="Revisão">Revisão</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Especialidades">Especialidade</label>
+                        @Html.DropDownList("Especialidade", null, new { @class = "form-control" })
+                    </div>
+                    if (Model.Especialidade != null)
+                    {
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary">Continuar</button>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.Especialidade != null)
+{
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="tabbable-line">
+                <div class="tab-content">
+                    <div class="tab-pane active fontawesome-demo" id="tab1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card card-topline-red">
+                                    <div class="card-head">
+                                        <header></header>
+                                        <div class="tools">
+                                            <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                            @*<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                                                <a class="t-close btn-color fa fa-times" href="javascript:;"></a>*@
+                                        </div>
+                                    </div>
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-6 col-xs-6">
+                                                <div class="btn-group">
+                                                    <p>
+                                                        <b>Escolha o médico para a realização da marcação!</b>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="table-scrollable">
+                                            <table class="table table-hover table-checkable order-column full-width" id="example4">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Nome </th>
+                                                        <th class="center">Descrição</th>
+                                                        <th class="center"> Acções </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var medico in ViewBag.Medicos)
+                                                    {
+                                                        <tr class="odd gradeX">
+                                                            <td>@medico.Nome</td>
+                                                            <td>@medico.Especialidade.Nome</td>
+                                                            <td>
+                                                                <a href="edit_patient.html" class="btn btn-primary btn-xs">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
+                                                                @using (Html.BeginForm("Adicionar", "Marcacao", FormMethod.Post))
+                                                                {
+                                                                    @Html.AntiForgeryToken()
+                                                                    @Html.Hidden("MedicoID", (int)medico.ID)
+                                                                    @Html.Hidden("PacienteID", Model.PacienteID)
+                                                                    @Html.Hidden("TipoMarcacao", Model.TipoMarcacao)
+                                                                    @Html.Hidden("Especialidade", Model.Especialidade)
+                                                                    <button type="submit" class="btn btn-success btn-xs">
+                                                                        <i class="fa fa-check "></i>
+                                                                    </button>
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="panel">
+                <header class="panel-heading panel-heading-blue">
+                    Marcações de <b>@Model.Especialidade</b>
+                </header>
+                <div class="panel-body">
+                    <div id="calendario" class="has-toolbar"> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/fullcalendar");
+}
