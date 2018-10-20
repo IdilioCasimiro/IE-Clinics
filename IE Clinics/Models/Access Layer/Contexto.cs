@@ -20,6 +20,11 @@ namespace IE_Clinics.Models.Access_Layer
         public IDbSet<Medico> Medicos { get; set; }
         public IDbSet<Especialidade> Especialidades { get; set; }
         public IDbSet<Marcacao> Marcacoes { get; set; }
+        public IDbSet<Triagem> Triagens { get; set; }
+        public IDbSet<AnaliseMedica> AnaliseMedicas { get; set; }
+        public IDbSet<Prescricao> Prescricoes { get; set; }
+        public IDbSet<Exame> Exames { get; set; }
+        public IDbSet<Medicamento> Medicamentos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,6 +36,14 @@ namespace IE_Clinics.Models.Access_Layer
             modelBuilder.Entity<Marcacao>().HasKey(p => p.ID);
             modelBuilder.Entity<Marcacao>().HasRequired(p => p.Paciente).WithMany(p => p.Marcacoes).HasForeignKey(p => p.PacienteID);
             modelBuilder.Entity<Marcacao>().HasRequired(p => p.Medico).WithMany(p => p.Marcacoes).HasForeignKey(p => p.MedicoID);
+
+            //Relacionamentos com as propriedades respectivas a análise médica
+            modelBuilder.Entity<Marcacao>().HasOptional(p => p.Triagem).WithRequired(p => p.Marcacao);
+            modelBuilder.Entity<Marcacao>().HasOptional(p => p.Prescricao).WithRequired(p => p.Marcacao);
+            modelBuilder.Entity<Marcacao>().HasOptional(p => p.AnaliseMedica).WithRequired(p => p.Marcacao);
+
+            modelBuilder.Entity<Triagem>().HasKey(p => p.ID);
+            modelBuilder.Entity<Triagem>().HasRequired(p => p.Marcacao).WithOptional(p => p.Triagem);
 
             //Impede com que o nome das tabelas esteja no plural
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

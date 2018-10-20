@@ -1,0 +1,58 @@
+﻿@model IE_Clinics.Models.Dominio.Triagem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Triagem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Marcacao.TipoMarcacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marcacao.TipoMarcacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Peso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Peso)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrenquenciaCardiaca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrenquenciaCardiaca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PressaoArterial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PressaoArterial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Observacoes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Observacoes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

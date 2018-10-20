@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<IE_Clinics.Models.Dominio.Marcacao>
-
+@using IE_Clinics.Models.Dominio
 @{
     ViewBag.Title = "Lista de marcações";
 }
@@ -29,44 +29,82 @@
                                                     <th class="center"> Tipo de marcação </th>
                                                     <th class="center"> Especialidade </th>
                                                     <th class="center"> Data </th>
-                                                    <th class="center"> Hora </th>
+                                                    <th class="center"> Horário </th>
                                                     <th class="center"> Médico </th>
+                                                    <th class="center"> Estado </th>
+                                                    <th class="center" title="Inicar triagem"> <i class="fa fa-clock-o"></i> Triagem</th>
                                                     <th class="center"> Opções </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var marcacao in Model)
                                                 {
-                                                <tr class="odd gradeX">
-                                                    <td>@marcacao.Paciente.Nome</td>
-                                                    <td class="center">@marcacao.TipoMarcacao</td>
-                                                    <td class="center">@marcacao.Especialidade</td>
-                                                    <td class="center">@marcacao.Data.ToShortDateString()</td>
-                                                    <td class="center">@marcacao.Data.ToShortTimeString()</td>
-                                                    <td class="center">@marcacao.Medico.Nome</td>
-                                                    <td class="center">
-                                                        <div class="btn-group">
-                                                            <button class="btn btn-xs btn-primary dropdown-toggle center no-margin" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                                Opções
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu pull-left" role="menu">
-                                                                <li>
-                                                                    <a href=""><i class="fa fa-clock-o"></i> Efectuar marcação </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;"><i class="fa fa-eye"></i> Detalhes </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;"><i class="fa fa-pencil"></i> Editar </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="javascript:;"><i class="fa fa-trash-o"></i> Eliminar </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                    <tr class="odd gradeX">
+                                                        <td>@marcacao.Paciente.Nome</td>
+                                                        <td class="center">@marcacao.TipoMarcacao</td>
+                                                        <td class="center">@marcacao.Especialidade</td>
+                                                        <td class="center">@marcacao.Data.ToShortDateString()</td>
+                                                        <td class="center">@marcacao.Data.ToShortTimeString() - @marcacao.Data.AddMinutes(45).ToShortTimeString()</td>
+                                                        <td class="center">@marcacao.Medico.Nome</td>
+                                                        <td class="center">
+                                                            @if (marcacao.Estado == EstadoMarcacao.Agendado)
+                                                            {
+                                                                <button class="btn btn-xs btn-info no-margin">@marcacao.Estado</button>
+                                                            }
+                                                            else if (marcacao.Estado == EstadoMarcacao.Reagendado)
+                                                            {
+                                                                <button class="btn btn-xs btn-primary no-margin">@marcacao.Estado</button>
+                                                            }
+                                                            else if (marcacao.Estado == EstadoMarcacao.Aguardando_Atendimento)
+                                                            {
+                                                                <button class="btn btn-xs btn-warning no-margin">@marcacao.Estado</button>
+                                                            }
+                                                            else if (marcacao.Estado == EstadoMarcacao.Paciente_Atendido)
+                                                            {
+                                                                <button class="btn btn-xs btn-success no-margin">@marcacao.Estado</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="btn btn-xs btn-danger no-margin">Paciente faltou</button>
+                                                            }
+                                                        </td>
+                                                        <td class="center">
+                                                            @if (marcacao.Estado == EstadoMarcacao.Agendado)
+                                                            {
+                                                                <a title="Iniciar triagem" href="@Url.Action("Efectuar-Triagem", "Triagem", new { id = marcacao.ID})"><i class="fa fa-check"></i></a>
+                                                            }
+                                                            else if (marcacao.Estado == EstadoMarcacao.Aguardando_Atendimento)
+                                                            {
+                                                                <i title="Triagem efectuada" class="fa fa-check success"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                            <i title="Não é possível realizar a triagem" class="fa fa-close"></i>
+                                                            }
+                                                        </td>
+                                                        <td class="center">
+                                                            <div class="btn-group">
+                                                                <button class="btn btn-xs btn-primary dropdown-toggle center no-margin" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                                    Opções
+                                                                    <i class="fa fa-angle-down"></i>
+                                                                </button>
+                                                                <ul class="dropdown-menu pull-left" role="menu">
+                                                                    <li>
+                                                                        <a href=""><i class="fa fa-clock-o"></i> Realizar marcação</a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;"><i class="fa fa-calendar"></i> Reagendar </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;"><i class="fa fa-pencil"></i> Editar </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="javascript:;"><i class="fa fa-trash-o"></i> Eliminar </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>

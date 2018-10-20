@@ -1,4 +1,5 @@
-﻿using IE_Clinics.Models.Access_Layer;
+﻿using ICHostweb.Controllers.DomainControllers;
+using IE_Clinics.Models.Access_Layer;
 using IE_Clinics.Models.Dominio;
 using System;
 using System.Data;
@@ -95,25 +96,38 @@ namespace IE_Clinics.Controllers.Dominio
         //}
 
         [HttpPost]
-        public async Task<ActionResult> Adicionar([Bind(Include = "PacienteID, MedicoID, Especialidade, TipoMarcacao")] Marcacao marcacao)
+        public async Task<ActionResult> Adicionar([Bind(Include = "PacienteID, MedicoID, Especialidade, TipoMarcacao, Data, Observacao")] Marcacao marcacao, string hora)
         {
-            marcacao.Data = DateTime.Now;
+            marcacao.Data = DateTime.Parse(marcacao.Data.ToShortDateString() + " " + hora);
+            marcacao.Estado = EstadoMarcacao.Agendado;
             marcacao.Duracao = 45;
-            marcacao.Observacao = "Febre alta";
+
+            EmailController email = new EmailController();
 
             if (ModelState.IsValid)
             {
                 db.Marcacoes.Add(marcacao);
                 await db.SaveChangesAsync();
+
+                var mensagem = email.Mensagem(marcacao);
+                var destinatario = await db.Pacientes.Where(x => x.ID == marcacao.PacienteID).FirstOrDefaultAsync();
+                await email.EnviarEmail("Nova consulta", mensagem, destinatario.Email, true);
+
                 return RedirectToAction("Index");
             }
+            else
+            {
 
-            ViewBag.Paciente = db.Pacientes.Find(marcacao.PacienteID);
-            ViewBag.Especialidade = new SelectList(db.Especialidades, "ID", "Nome");
+                ViewBag.Paciente = db.Pacientes.Find(marcacao.PacienteID);
+                ViewBag.Especialidade = new SelectList(db.Especialidades, "ID", "Nome");
 
-            ViewBag.Medicos = db.Medicos.Where(x => x.Especialidade.ID.ToString() == marcacao.Especialidade).ToList();
+                ViewBag.Medicos = db.Medicos.Where(x => x.Especialidade.ID.ToString() == marcacao.Especialidade).ToList();
 
-            return RedirectToAction("EfectuarMarcacao");
+                return View(marcacao);
+            }
+
+
+            //return RedirectToAction("EfectuarMarcacao");
         }
 
         [ActionName("Calendario-Marcacoes")]
@@ -142,26 +156,26 @@ namespace IE_Clinics.Controllers.Dominio
             return new JsonResult { Data = marcacoes, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        public async Task<JsonResult> ObterMarcacoesMedico(int id)
-        {
-            var marcacoes = await (
-                from medico in db.Medicos
-                join marcacao in db.Marcacoes
-                on medico.ID equals marcacao.MedicoID
-                where medico.ID == id
-                select new MarcacaoCalendario
-                {
-                    TipoMarcacao = marcacao.TipoMarcacao,
-                    Especialidade = marcacao.Especialidade,
-                    Data = marcacao.Data,
-                    Duracao = marcacao.Duracao,
-                    Observacao = marcacao.Observacao,
-                    Paciente = marcacao.Paciente.Nome,
-                    Medico = marcacao.Medico.Nome
-                }).ToListAsync();
+        //public async Task<JsonResult> ObterMarcacoesMedico(int id)
+        //{
+        //    var marcacoes = await (
+        //        from medico in db.Medicos
+        //        join marcacao in db.Marcacoes
+        //        on medico.ID equals marcacao.MedicoID
+        //        where medico.ID == id
+        //        select new MarcacaoCalendario
+        //        {
+        //            TipoMarcacao = marcacao.TipoMarcacao,
+        //            Especialidade = marcacao.Especialidade,
+        //            Data = marcacao.Data,
+        //            Duracao = marcacao.Duracao,
+        //            Observacao = marcacao.Observacao,
+        //            Paciente = marcacao.Paciente.Nome,
+        //            Medico = marcacao.Medico.Nome
+        //        }).ToListAsync();
 
-            return new JsonResult { Data = marcacoes, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
+        //    return new JsonResult { Data = marcacoes, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        //}
 
         // GET: Marcacoes/Create
         public ActionResult Create()

@@ -24,7 +24,8 @@
             $.each(data, function (i, v) {
                 events.push({
                     title: v.TipoMarcacao,
-                    description: v.Especialidade,
+                    description: v.Medico,
+                    especialidade: v.Especialidade,
                     start: v.Data,
                     end: v.Data,
                     details: v.Medico,
@@ -33,39 +34,16 @@
                     backgroundColor: v.TipoMarcacao == 'Consulta' ? '#F3565D' : ''
                 });
             })
-            GenerateCalendar(events);
+            GenerateCalendar(events, '#calendario');
         },
         error: function (error) {
             alert(error.responseText);
         }
     })
 
-    $.ajax({
-        type: "GET",
-        url: "/marcacao/obtermarcacoesmedico/2" + getUrlParameter('nome'),
-        success: function (data) {
-            $.each(data, function (i, v) {
-                events.push({
-                    title: v.TipoMarcacao,
-                    description: v.Especialidade,
-                    start: v.Data,
-                    end: v.Data,
-                    details: v.Medico,
-                    paciente: v.Paciente,
-                    obs: v.Observacao,
-                    backgroundColor: v.TipoMarcacao == 'Consulta' ? '#F3565D' : ''
-                });
-            })
-            GenerateCalendar(events);
-        },
-        error: function (error) {
-            alert(error.responseText);
-        }
-    })
-
-    function GenerateCalendar(events) {
-        $('#calendario').fullCalendar('destroy');
-        $('#calendario').fullCalendar({
+    function GenerateCalendar(events, calendarName) {
+        $(calendarName).fullCalendar('destroy');
+        $(calendarName).fullCalendar({
             contentHeight: 400,
             dafaultDate: new Date(),
             timeFormat: 'h(:mm)a',
@@ -80,15 +58,14 @@
                 $('#modal').modal();
                 $('#paciente').text(callEvent.paciente);
                 $('#tipoMarcacao').text(callEvent.title);
-                $('#especialidade').text(callEvent.description);
+                $('#especialidade').text(callEvent.especialidade);
                 var mes = new Date(callEvent.start).getMonth() + 1;
                 $('#data').text(
                     new Date(callEvent.start).getDate()
                     + "/" + mes
                     + "/" + new Date(callEvent.start).getFullYear());
-                var hora = new Date(callEvent.start).getHours() - 1;
-                $('#hora').text(hora
-                    + ":" + new Date(callEvent.start).getMinutes());
+                $('#hora').text(new Date(callEvent.start).getHours()
+                    + "h:" + new Date(callEvent.start).getMinutes());
                 $('#medico').text(callEvent.details);
                 $('#obs').text(callEvent.obs);
             }

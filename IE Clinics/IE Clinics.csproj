@@ -197,6 +197,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dominio\EspecialidadeController.cs" />
     <Compile Include="Controllers\Dominio\MarcacaoController.cs" />
+    <Compile Include="Controllers\Dominio\TriagemController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Dominio\MedicoController.cs" />
@@ -236,11 +238,23 @@
     <Compile Include="Migrations\201810181837261_DropCreateDB.Designer.cs">
       <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.cs" />
+    <Compile Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.Designer.cs">
+      <DependentUpon>201810201635340_ModelosDeAnaliseAdicionados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810202242132_TriagemTerminada.cs" />
+    <Compile Include="Migrations\201810202242132_TriagemTerminada.Designer.cs">
+      <DependentUpon>201810202242132_TriagemTerminada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Access Layer\Contexto.cs" />
     <Compile Include="Models\Access Layer\Initializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Dominio\Analise.cs" />
+    <Compile Include="Models\Dominio\AnaliseMedica.cs" />
+    <Compile Include="Models\Dominio\Exame.cs" />
+    <Compile Include="Models\Dominio\Medicamento.cs" />
+    <Compile Include="Models\Dominio\Prescricao.cs" />
+    <Compile Include="Models\Dominio\Triagem.cs" />
     <Compile Include="Models\Dominio\Especialidade.cs" />
     <Compile Include="Models\Dominio\Marcacao.cs" />
     <Compile Include="Models\Dominio\MarcacaoCalendario.cs" />
@@ -259,6 +273,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\formlayout.css" />
     <Content Include="Content\Fullcalendar\fullcalendar.css" />
+    <Content Include="Content\html\nova-consulta.html" />
     <Content Include="Content\inbox.min.css" />
     <Content Include="Content\jquery.mCustomScrollbar.css" />
     <Content Include="Content\Material\material.min.css" />
@@ -399,6 +414,11 @@
     <Content Include="Views\Marcacao\Index.cshtml" />
     <Content Include="Views\Marcacao\Efectuar-Marcacao.cshtml" />
     <Content Include="Views\Marcacao\Calendario-Marcacoes.cshtml" />
+    <Content Include="Views\Triagem\Efectuar-Triagem.cshtml" />
+    <Content Include="Views\Triagem\Delete.cshtml" />
+    <Content Include="Views\Triagem\Details.cshtml" />
+    <Content Include="Views\Triagem\Edit.cshtml" />
+    <Content Include="Views\Triagem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810172302149_InitialCreate.resx">
@@ -424,6 +444,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810181837261_DropCreateDB.resx">
       <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.resx">
+      <DependentUpon>201810201635340_ModelosDeAnaliseAdicionados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810202242132_TriagemTerminada.resx">
+      <DependentUpon>201810202242132_TriagemTerminada.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
