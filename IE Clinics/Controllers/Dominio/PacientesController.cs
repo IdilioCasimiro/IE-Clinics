@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace IE_Clinics.Controllers
 {
-    public class PacienteController : Controller
+    public class PacientesController : Controller
     {
         private Contexto contexto = new Contexto();
 

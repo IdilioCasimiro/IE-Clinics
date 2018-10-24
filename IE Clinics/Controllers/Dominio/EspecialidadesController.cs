@@ -12,7 +12,7 @@ using IE_Clinics.Models.Dominio;
 
 namespace IE_Clinics.Controllers
 {
-    public class EspecialidadeController : Controller
+    public class EspecialidadesController : Controller
     {
         private Contexto db = new Contexto();
 
@@ -21,18 +21,15 @@ namespace IE_Clinics.Controllers
         {
             return View(await db.Especialidades.ToListAsync());
         }
-
-        // GET: Especialidades/Create
-        [ActionName("Adicionar-Especialidade")]
-        public ActionResult AdicionarEspecialidade()
+        
+        public ActionResult Adicionar()
         {
             return View();
         }
-
-        [ActionName("Adicionar-Especialidade")]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AdicionarEspecialidade([Bind(Include = "ID,Nome,Descricao")] Especialidade especialidades)
+        public async Task<ActionResult> Adicionar([Bind(Include = "ID,Nome,Descricao")] Especialidade especialidades)
         {
             if (ModelState.IsValid)
             {

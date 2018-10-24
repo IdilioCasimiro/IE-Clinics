@@ -10,111 +10,109 @@ using System.Web.Mvc;
 using IE_Clinics.Models.Access_Layer;
 using IE_Clinics.Models.Dominio;
 
-namespace IE_Clinics.Controllers
+namespace IE_Clinics.Controllers.Dominio
 {
-    public class MedicoController : Controller
+    public class MedicamentosController : Controller
     {
         private Contexto db = new Contexto();
 
-        // GET: Medico
+        // GET: Medicamentos
         public async Task<ActionResult> Index()
         {
-            var medicos = db.Medicos.Include(m => m.Especialidade);
-            return View(await medicos.ToListAsync());
+            return View(await db.Medicamentos.ToListAsync());
         }
 
-        // GET: Medico/Details/5
-        public ActionResult Details(int? id)
+        // GET: Medicamentos/Details/5
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medico medico = db.Medicos.Find(id);
-            if (medico == null)
+            Medicamento medicamento = await db.Medicamentos.FindAsync(id);
+            if (medicamento == null)
             {
                 return HttpNotFound();
             }
-            return View(medico);
+            return View(medicamento);
         }
 
-        // GET: Medico/Create
-        public ActionResult Adicionar()
+        // GET: Medicamentos/Create
+        public ActionResult Create()
         {
-            ViewBag.EspecialidadeID = new SelectList(db.Especialidades, "ID", "Nome");
             return View();
         }
-        
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Adicionar([Bind(Include = "ID,EspecialidadeID,Nome,UltimoNome,DataNascimento,Sexo,Pais,Provincia,Endereco,Telefone,TelefoneAlternativo,Email,GrupoSanguineo")] Medico medico)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Medicos.Add(medico);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.EspecialidadeID = new SelectList(db.Especialidades, "ID", "Nome", medico.EspecialidadeID);
-            return View(medico);
-        }
-
-        // GET: Medico/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Medico medico = db.Medicos.Find(id);
-            if (medico == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.EspecialidadeID = new SelectList(db.Especialidades, "ID", "Nome", medico.EspecialidadeID);
-            return View(medico);
-        }
-
-        // POST: Medico/Edit/5
+        // POST: Medicamentos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,EspecialidadeID,Nome,UltimoNome,DataNascimento,Sexo,Profissao,Pais,Provincia,Endereco,Telefone,TelefoneAlternativo,Email,GrupoSanguineo")] Medico medico)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Nome,Descricao,Quantidade,Valor")] Medicamento medicamento)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medico).State = EntityState.Modified;
+                db.Medicamentos.Add(medicamento);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.EspecialidadeID = new SelectList(db.Especialidades, "ID", "Nome", medico.EspecialidadeID);
-            return View(medico);
+
+            return View(medicamento);
         }
 
-        // GET: Medico/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Medicamentos/Edit/5
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medico medico = db.Medicos.Find(id);
-            if (medico == null)
+            Medicamento medicamento = await db.Medicamentos.FindAsync(id);
+            if (medicamento == null)
             {
                 return HttpNotFound();
             }
-            return View(medico);
+            return View(medicamento);
         }
 
-        // POST: Medico/Delete/5
+        // POST: Medicamentos/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Nome,Descricao,Quantidade,Valor")] Medicamento medicamento)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(medicamento).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(medicamento);
+        }
+
+        // GET: Medicamentos/Delete/5
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Medicamento medicamento = await db.Medicamentos.FindAsync(id);
+            if (medicamento == null)
+            {
+                return HttpNotFound();
+            }
+            return View(medicamento);
+        }
+
+        // POST: Medicamentos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Medico medico = db.Medicos.Find(id);
-            db.Medicos.Remove(medico);
+            Medicamento medicamento = await db.Medicamentos.FindAsync(id);
+            db.Medicamentos.Remove(medicamento);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

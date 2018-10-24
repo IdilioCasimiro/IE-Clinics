@@ -12,123 +12,112 @@ using IE_Clinics.Models.Dominio;
 
 namespace IE_Clinics.Controllers.Dominio
 {
-    public class TriagemController : Controller
+    public class PrescricoesController : Controller
     {
         private Contexto db = new Contexto();
 
-        // GET: Triagem
+        // GET: Prescricaes
         public async Task<ActionResult> Index()
         {
-            var Triagens = db.Triagens.Include(t => t.Marcacao);
-            return View(await Triagens.ToListAsync());
+            var prescricoes = db.Prescricoes.Include(p => p.Marcacao);
+            return View(await prescricoes.ToListAsync());
         }
 
-        // GET: Triagem/Details/5
+        // GET: Prescricaes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Triagem triagem = db.Triagens.Find(id);
-            if (triagem == null)
+            Prescricao prescricao = await db.Prescricoes.FindAsync(id);
+            if (prescricao == null)
             {
                 return HttpNotFound();
             }
-            return View(triagem);
+            return View(prescricao);
         }
 
-        [ActionName("Efectuar-Triagem")]
-        public ActionResult EfectuarTriagem(int id)
+        // GET: Prescricaes/Create
+        public ActionResult Create()
         {
-            if (id != 0)
-            {
-                var idPaciente = db.Marcacoes.Find(id).PacienteID;
-                ViewBag.NomePaciente = db.Pacientes.Find(idPaciente).Nome;
-                return View(new Triagem() { ID = id});
-            }
-
-            return RedirectToAction("Index", "Marcacao");
+            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao");
+            return View();
         }
 
-        // POST: Triagem/Create
+        // POST: Prescricaes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("Efectuar-Triagem")]
-        public async Task<ActionResult> EfectuarTriagem([Bind(Include = "ID,Peso,FrenquenciaCardiaca,PressaoArterial,Temperatura,Observacoes")] Triagem triagem)
+        public async Task<ActionResult> Create([Bind(Include = "ID")] Prescricao prescricao)
         {
             if (ModelState.IsValid)
             {
-                db.Triagens.Add(triagem);
-                var marcacao = db.Marcacoes.Find(triagem.ID);
-                marcacao.Estado = EstadoMarcacao.Aguardando_Atendimento;
-                db.Entry(marcacao).State = EntityState.Modified;
-
+                db.Prescricoes.Add(prescricao);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", triagem.ID);
-            return View(triagem);
+            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            return View(prescricao);
         }
 
-        // GET: Triagem/Edit/5
+        // GET: Prescricaes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Triagem triagem = db.Triagens.Find(id);
-            if (triagem == null)
+            Prescricao prescricao = await db.Prescricoes.FindAsync(id);
+            if (prescricao == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", triagem.ID);
-            return View(triagem);
+            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            return View(prescricao);
         }
 
-        // POST: Triagem/Edit/5
+        // POST: Prescricaes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Peso,FrenquenciaCardiaca,PressaoArterial,Observacoes")] Triagem triagem)
+        public async Task<ActionResult> Edit([Bind(Include = "ID")] Prescricao prescricao)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(triagem).State = EntityState.Modified;
+                db.Entry(prescricao).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", triagem.ID);
-            return View(triagem);
+            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            return View(prescricao);
         }
 
-        // GET: Triagem/Delete/5
+        // GET: Prescricaes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Triagem triagem = db.Triagens.Find(id);
-            if (triagem == null)
+            Prescricao prescricao = await db.Prescricoes.FindAsync(id);
+            if (prescricao == null)
             {
                 return HttpNotFound();
             }
-            return View(triagem);
+            return View(prescricao);
         }
 
-        // POST: Triagem/Delete/5
+        // POST: Prescricaes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Triagem triagem = db.Triagens.Find(id);
-            db.Triagens.Remove(triagem);
+            Prescricao prescricao = await db.Prescricoes.FindAsync(id);
+            db.Prescricoes.Remove(prescricao);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

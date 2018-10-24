@@ -291,10 +291,10 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item  ">
-                                        @Html.ActionLink("Lista de pacientes", "Index", "Paciente", new { area = "" }, new { @class = "nav-link title" })
+                                        @Html.ActionLink("Lista de pacientes", "Index", "Pacientes", new { area = "" }, new { @class = "nav-link title" })
                                     </li>
                                     <li class="nav-item  ">
-                                        @Html.ActionLink("Adicionar paciente", "Adicionar-Paciente", "Paciente", new { area = "" }, new { @class = "nav-link title" })
+                                        @Html.ActionLink("Adicionar paciente", "Adicionar-Paciente", "Pacientes", new { area = "" }, new { @class = "nav-link title" })
                                     </li>
                                 </ul>
                             </li>
@@ -306,13 +306,13 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Index", "Medico", new { area = ""})" class="nav-link ">
+                                        <a href="@Url.Action("Index", "Medicos", new { area = ""})" class="nav-link ">
                                             <span class="title">Lista de médicos</span>
                                             <span class="selected"></span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Adicionar-Medico", "Medico", new { area = ""})" class="nav-link ">
+                                        <a href="@Url.Action("Adicionar-Medico", "Medicos", new { area = ""})" class="nav-link ">
                                             <span class="title">Adicionar médico</span>
                                         </a>
                                     </li>
@@ -359,12 +359,12 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Index", "Especialidade", new { area = "" })" class="nav-link ">
+                                        <a href="@Url.Action("Index", "Especialidades", new { area = "" })" class="nav-link ">
                                             <span class="title">Lista de especialidades</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Adicionar-Especialidade", "Especialidade", new { area = "" })" class="nav-link ">
+                                        <a href="@Url.Action("Adicionar", "Especialidades", new { area = "" })" class="nav-link ">
                                             <span class="title">Adicionar especialidade</span>
                                         </a>
                                     </li>
@@ -377,12 +377,12 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Index", "Marcacao", new { area = ""})" class="nav-link ">
+                                        <a href="@Url.Action("Index", "Marcacoes", new { area = ""})" class="nav-link ">
                                             <span class="title">Lista de marcações</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Calendario-Marcacoes", "Marcacao")" class="nav-link ">
+                                        <a href="@Url.Action("Calendario-Marcacoes", "Marcacoes")" class="nav-link ">
                                             <span class="title">Calendário de marcações</span>
                                         </a>
                                     </li>
@@ -423,19 +423,24 @@
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="nav-item">
-                                        <a href="index.html" class="nav-link ">
-                                            <span class="title">Dashboard 1</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a href="dashboard2.html" class="nav-link ">
-                                            <span class="title">Dashboard 2</span>
+                                    <li class="nav-item  ">
+                                        <a href="@Url.Action("Index", "Medicamentos", new { area = ""})" class="nav-link ">
+                                            <span class="title">Lista de fármacos</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href="dashboard3.html" class="nav-link ">
-                                            <span class="title">Dashboard 3</span>
+                                        <a href="@Url.Action("Adicionar", "Medicamentos", new { area = ""})" class="nav-link ">
+                                            <span class="title">Adicionar fármaco</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="@Url.Action("Historico", "Medicamentos", new { area = ""})" class="nav-link ">
+                                            <span class="title">Efectuar venda</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item  ">
+                                        <a href="@Url.Action("Historico", "Medicamentos", new { area = ""})" class="nav-link ">
+                                            <span class="title">Histórico de vendas</span>
                                         </a>
                                     </li>
                                 </ul>

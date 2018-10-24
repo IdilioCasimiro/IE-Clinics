@@ -1,0 +1,26 @@
+﻿@model IE_Clinics.Models.Dominio.Prescricao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prescricao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Marcacao.TipoMarcacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marcacao.TipoMarcacao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

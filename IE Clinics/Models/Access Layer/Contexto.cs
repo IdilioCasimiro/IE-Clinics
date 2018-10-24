@@ -16,15 +16,15 @@ namespace IE_Clinics.Models.Access_Layer
         }
 
         //Definindo as tabelas que farão parte da base de dados
-        public IDbSet<Paciente> Pacientes { get; set; }
-        public IDbSet<Medico> Medicos { get; set; }
-        public IDbSet<Especialidade> Especialidades { get; set; }
-        public IDbSet<Marcacao> Marcacoes { get; set; }
-        public IDbSet<Triagem> Triagens { get; set; }
-        public IDbSet<AnaliseMedica> AnaliseMedicas { get; set; }
-        public IDbSet<Prescricao> Prescricoes { get; set; }
-        public IDbSet<Exame> Exames { get; set; }
-        public IDbSet<Medicamento> Medicamentos { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Especialidade> Especialidades { get; set; }
+        public DbSet<Marcacao> Marcacoes { get; set; }
+        public DbSet<Triagem> Triagens { get; set; }
+        public DbSet<AnaliseMedica> AnaliseMedicas { get; set; }
+        public DbSet<Prescricao> Prescricoes { get; set; }
+        public DbSet<Exame> Exames { get; set; }
+        public DbSet<Medicamento> Medicamentos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

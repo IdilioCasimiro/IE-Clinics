@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace IE_Clinics.Controllers.Dominio
 {
-    public class MarcacaoController : Controller
+    public class MarcacoesController : Controller
     {
         private Contexto db = new Contexto();
 
@@ -29,7 +29,7 @@ namespace IE_Clinics.Controllers.Dominio
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Marcacao marcacao = db.Marcacoes.Find(id);
+            Marcacao marcacao = await db.Marcacoes.FindAsync(id);
             if (marcacao == null)
             {
                 return HttpNotFound();
@@ -81,7 +81,7 @@ namespace IE_Clinics.Controllers.Dominio
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return RedirectToAction("Efectuar-Marcacao", new { id = id });
+            //return RedirectToAction("Efectuar-Marcacao", new { id = id });
         }
 
         //[HttpPost]
@@ -213,7 +213,7 @@ namespace IE_Clinics.Controllers.Dominio
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Marcacao marcacao = db.Marcacoes.Find(id);
+            Marcacao marcacao = await db.Marcacoes.FindAsync(id);
             if (marcacao == null)
             {
                 return HttpNotFound();
@@ -248,7 +248,7 @@ namespace IE_Clinics.Controllers.Dominio
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Marcacao marcacao = db.Marcacoes.Find(id);
+            Marcacao marcacao = await db.Marcacoes.FindAsync(id);
             if (marcacao == null)
             {
                 return HttpNotFound();

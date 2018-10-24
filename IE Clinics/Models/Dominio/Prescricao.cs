@@ -12,11 +12,11 @@ namespace IE_Clinics.Models.Dominio
         [Required(ErrorMessage = "Campo obrigatório")]
         public List<Medicamento> Medicamento { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public string Posologia { get; set; }
+        //[Required(ErrorMessage = "Campo obrigatório")]
+        //public string Posologia { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public int Quantidade { get; set; }
+        //[Required(ErrorMessage = "Campo obrigatório")]
+        //public int Quantidade { get; set; }
 
         public virtual Marcacao Marcacao { get; set; }
     }
