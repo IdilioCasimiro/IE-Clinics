@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using IE_Clinics.Models.Access_Layer;
+﻿using IE_Clinics.Models.Access_Layer;
 using IE_Clinics.Models.Dominio;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace IE_Clinics.Controllers.Dominio
 {
@@ -16,14 +11,14 @@ namespace IE_Clinics.Controllers.Dominio
     {
         private Contexto db = new Contexto();
 
-        // GET: Prescricaes
+        // GET: Prescricoes
         public async Task<ActionResult> Index()
         {
             var prescricoes = db.Prescricoes.Include(p => p.Marcacao);
             return View(await prescricoes.ToListAsync());
         }
 
-        // GET: Prescricaes/Details/5
+        // GET: Prescricoes/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,32 +33,40 @@ namespace IE_Clinics.Controllers.Dominio
             return View(prescricao);
         }
 
-        // GET: Prescricaes/Create
-        public ActionResult Create()
+        // GET: Prescricoes/Create
+        public ActionResult Create(int id)
         {
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao");
-            return View();
+            if(id != 0){
+                var marcacao = db.Marcacoes.Find(id);
+                ViewBag.NomePaciente = db.Pacientes.Find(marcacao.PacienteID).Nome;
+                return View(new Prescricao { PrescricaoID = id });
+            }
+            
+            return RedirectToAction("Index", "Marcacoes");
         }
 
-        // POST: Prescricaes/Create
+        // POST: Prescricoes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID")] Prescricao prescricao)
+        public async Task<ActionResult> Create([Bind(Include = "PrescricaoID, Medicamentos")] Prescricao prescricao)
         {
             if (ModelState.IsValid)
             {
                 db.Prescricoes.Add(prescricao);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                var marcacao = await db.Marcacoes.FindAsync(prescricao.PrescricaoID);
+                ViewBag.NomePaciente = db.Pacientes.Find(marcacao.PacienteID).Nome;
+                return RedirectToAction("Create", "AnalisesMedicas", new { id = marcacao.ID});
             }
 
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            ViewBag.PrescricaoID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.PrescricaoID);
             return View(prescricao);
         }
 
-        // GET: Prescricaes/Edit/5
+        // GET: Prescricoes/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,16 +78,16 @@ namespace IE_Clinics.Controllers.Dominio
             {
                 return HttpNotFound();
             }
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            ViewBag.PrescricaoID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.PrescricaoID);
             return View(prescricao);
         }
 
-        // POST: Prescricaes/Edit/5
+        // POST: Prescricoes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID")] Prescricao prescricao)
+        public async Task<ActionResult> Edit([Bind(Include = "PrescricaoID")] Prescricao prescricao)
         {
             if (ModelState.IsValid)
             {
@@ -92,11 +95,11 @@ namespace IE_Clinics.Controllers.Dominio
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.ID);
+            ViewBag.PrescricaoID = new SelectList(db.Marcacoes, "ID", "TipoMarcacao", prescricao.PrescricaoID);
             return View(prescricao);
         }
 
-        // GET: Prescricaes/Delete/5
+        // GET: Prescricoes/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -111,7 +114,7 @@ namespace IE_Clinics.Controllers.Dominio
             return View(prescricao);
         }
 
-        // POST: Prescricaes/Delete/5
+        // POST: Prescricoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)

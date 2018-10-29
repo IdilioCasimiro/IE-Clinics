@@ -9,13 +9,13 @@ namespace IE_Clinics.Models.Dominio
 {
     public class AnaliseMedica
     {
-        public int ID { get; set; }
+        public int AnaliseMedicaID { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         [DisplayName("Indicação clínica")]
         public string IndicacaoClinica { get; set; }
 
-        public List<Exame> Exames { get; set; }
+        public string Exames { get; set; }
         
         public virtual Marcacao Marcacao { get; set; }
     }

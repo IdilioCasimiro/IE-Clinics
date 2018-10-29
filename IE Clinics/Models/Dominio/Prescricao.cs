@@ -8,9 +8,9 @@ namespace IE_Clinics.Models.Dominio
 {
     public class Prescricao
     {
-        public int ID { get; set; }
-        [Required(ErrorMessage = "Campo obrigatório")]
-        public List<Medicamento> Medicamento { get; set; }
+        public int PrescricaoID { get; set; }
+
+        //public List<string> Medicamentos { get; set; }
 
         //[Required(ErrorMessage = "Campo obrigatório")]
         //public string Posologia { get; set; }
@@ -18,6 +18,9 @@ namespace IE_Clinics.Models.Dominio
         //[Required(ErrorMessage = "Campo obrigatório")]
         //public int Quantidade { get; set; }
 
+        public string Medicamentos { get; set; }
+
         public virtual Marcacao Marcacao { get; set; }
     }
+
 }

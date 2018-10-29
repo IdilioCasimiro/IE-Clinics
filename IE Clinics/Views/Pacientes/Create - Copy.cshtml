@@ -8,54 +8,6 @@
     <div class="col-md-12 col-sm-12">
         <div class="card card-box">
             <div class="card-head">
-                <header>Paciente: @ViewBag.NomePaciente</header>
-                <button id="panel-button"
-                        class="mdl-button mdl-js-button mdl-button--icon pull-right"
-                        data-upgraded=",MaterialButton">
-                    <i class="material-icons">more_vert</i>
-                </button>
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                    data-mdl-for="panel-button">
-                    <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
-                    <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
-                    <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
-                </ul>
-            </div>
-            <div class="card-body " id="bar-parent">
-                @using (Html.BeginForm("Create", "Prescricoes", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="row">
-                        <input type="hidden" name="PrescricaoID" value="@Model.PrescricaoID" />
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <label for="peso">Medicamentos</label>
-                                @Html.TextAreaFor(model => model.Medicamentos, new { @class = "form-control", @rows = 5 })
-                                @Html.ValidationMessageFor(model => model.Medicamentos, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-xs-12">
-                            
-                            <div style="display: block; padding-right: 0">
-                                <button type="submit" class="btn btn-success">Salvar</button>
-                                <a href="@Url.Action("Index", "Marcacoes")" class="btn btn-default">Cancelar</a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-</div>
-
-@*<div class="row">
-    <div class="col-md-12 col-sm-12">
-        <div class="card card-box">
-            <div class="card-head">
                 <header>Formulário</header>
                 <button id="panel-button"
                         class="mdl-button mdl-js-button mdl-button--icon pull-right"
@@ -74,9 +26,9 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model., "ID")
+                    @*@Html.HiddenFor(model => model., "ID")*@
                     <input type="hidden" name="PrescricaoID" value="@Model.PrescricaoID" />
-                    @Html.Hidden("count", 1)
+                    @*@Html.Hidden("count", 1)
                         <div class="form-body">
                             <div class="form-group" id="field">
                                 <label class="control-label">
@@ -87,11 +39,11 @@
                                 <button type="button" class="btn btn-default add-more" id="b1"><span class="fa fa-plus"></span></button>
                             </div>
 
-                        </div>
+                        </div>*@
                     <div class="field_wrapper">
                         <div class="form-group">
                             @Html.TextBoxFor(model => model.Medicamentos)
-                            @*<input type="text" name="Medicamentos[0].MedicamentoID" class="form-control" />
+                            @*<input type="text" name="Medicamentos[0].MedicamentoID" class="form-control" />*@
                             <a href="javascript:void(0);" class="add_button" title="Adicionar medicamento"><span class="fa fa-plus"></span></a>
                         </div>
                     </div>
@@ -108,7 +60,7 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>
 
 @section Scripts {
     <script>

@@ -19,17 +19,15 @@ namespace IE_Clinics.Controllers
             var pacientes = await contexto.Pacientes.ToListAsync();
             return View(pacientes);
         }
-
-        [ActionName("Adicionar-Paciente")]
-        public ActionResult AdicionarPaciente()
+        
+        public ActionResult Adicionar()
         {
             return View();
         }
 
         [HttpPost]
-        [ActionName("Adicionar-Paciente")]
         [ValidateAntiForgeryToken]
-        public ActionResult AdicionarPaciente([Bind(Include = "Nome, UltimoNome, DataNascimento, Sexo, Pais, Provincia, Endereco, Telefone, TelefoneAlternativo, Email, GrupoSanguineo")] Paciente paciente)
+        public ActionResult Adicionar([Bind(Include = "Nome, DataNascimento, Sexo, Pais, Provincia, Endereco, Telefone, TelefoneAlternativo, Email, GrupoSanguineo")] Paciente paciente)
         {
             if (ModelState.IsValid)
             {

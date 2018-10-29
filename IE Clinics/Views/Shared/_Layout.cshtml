@@ -18,6 +18,11 @@
     @Styles.Render("~/Content/theme-styles")
     <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" />
+    <style>
+        .page-bar .page-breadcrumb {
+            display: none;
+        }
+    </style>
 </head>
 <!-- END HEAD -->
 
@@ -37,16 +42,16 @@
                 <ul class="nav navbar-nav navbar-left in">
                     <li><a href="#" class="menu-toggler sidebar-toggler"><i class="icon-menu"></i></a></li>
                 </ul>
-                <form class="search-form-opened" action="#" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search..." name="query">
-                        <span class="input-group-btn">
-                            <a href="javascript:;" class="btn submit">
-                                <i class="icon-magnifier"></i>
-                            </a>
-                        </span>
-                    </div>
-                </form>
+                @*<form class="search-form-opened" action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search..." name="query">
+                            <span class="input-group-btn">
+                                <a href="javascript:;" class="btn submit">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </form>*@
                 <!-- start mobile menu -->
                 <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
                     <span></span>
@@ -294,7 +299,7 @@
                                         @Html.ActionLink("Lista de pacientes", "Index", "Pacientes", new { area = "" }, new { @class = "nav-link title" })
                                     </li>
                                     <li class="nav-item  ">
-                                        @Html.ActionLink("Adicionar paciente", "Adicionar-Paciente", "Pacientes", new { area = "" }, new { @class = "nav-link title" })
+                                        @Html.ActionLink("Adicionar paciente", "Adicionar", "Pacientes", new { area = "" }, new { @class = "nav-link title" })
                                     </li>
                                 </ul>
                             </li>
@@ -326,20 +331,20 @@
                                 <ul class="sub-menu">
                                     <li class="nav-item  ">
                                         <a href="all_staffs.html" class="nav-link ">
-                                            <span class="title">All Staff</span>
+                                            <span class="title">Recepcionistas</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
                                         <a href="add_staff.html" class="nav-link ">
-                                            <span class="title">Add Staff</span>
+                                            <span class="title">Farmacéuticos</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
                                         <a href="add_staff_material.html" class="nav-link ">
-                                            <span class="title">Add Staff Material</span>
+                                            <span class="title">Administradores</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item  ">
+                                    @*<li class="nav-item  ">
                                         <a href="edit_staff.html" class="nav-link ">
                                             <span class="title">Edit Staff</span>
                                         </a>
@@ -348,7 +353,7 @@
                                         <a href="staff_profile.html" class="nav-link ">
                                             <span class="title">Staff Profile</span>
                                         </a>
-                                    </li>
+                                    </li>*@
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -429,7 +434,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item  ">
-                                        <a href="@Url.Action("Adicionar", "Medicamentos", new { area = ""})" class="nav-link ">
+                                        <a href="@Url.Action("Create", "Medicamentos", new { area = ""})" class="nav-link ">
                                             <span class="title">Adicionar fármaco</span>
                                         </a>
                                     </li>
@@ -486,10 +491,10 @@
                                             <span class="title">Adicionar utilizador</span>
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </li>
-                            
+
                         </ul>
                     </div>
                 </div>

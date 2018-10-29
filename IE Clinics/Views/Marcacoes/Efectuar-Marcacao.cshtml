@@ -160,7 +160,7 @@
                                             <td>@medico.Nome</td>
                                             <td>@medico.Especialidade.Nome</td>
                                             <td>
-                                                @using (Html.BeginForm("Adicionar", "Marcacao", FormMethod.Post, new { id = "form-efectuarMarcacao" }))
+                                                @using (Html.BeginForm("Adicionar", "Marcacoes", FormMethod.Post, new { id = "form-efectuarMarcacao" }))
                                                 {
                                                     @Html.AntiForgeryToken()
                                                     @Html.Hidden("MedicoID", (int)medico.ID)

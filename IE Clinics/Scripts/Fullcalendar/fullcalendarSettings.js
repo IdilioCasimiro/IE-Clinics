@@ -19,7 +19,7 @@
 
     $.ajax({
         type: "GET",
-        url: "/marcacao/obtermarcacoes",
+        url: "/marcacoes/obtermarcacoes",
         success: function (data) {
             $.each(data, function (i, v) {
                 events.push({

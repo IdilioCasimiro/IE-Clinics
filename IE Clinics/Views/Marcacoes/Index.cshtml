@@ -71,7 +71,7 @@
                                                         <td class="center">
                                                             @if (marcacao.Estado == EstadoMarcacao.Agendado)
                                                             {
-                                                                <a title="Iniciar triagem" href="@Url.Action("Efectuar-Triagem", "Triagem", new { id = marcacao.ID})"><i class="fa fa-check"></i></a>
+                                                                <a title="Iniciar triagem" href="@Url.Action("Efectuar-Triagem", "Triagens", new { id = marcacao.ID})"><i class="fa fa-check"></i></a>
                                                             }
                                                             else if (marcacao.Estado == EstadoMarcacao.Aguardando_Atendimento)
                                                             {
@@ -79,7 +79,7 @@
                                                             }
                                                             else
                                                             {
-                                                            <i title="Não é possível realizar a triagem" class="fa fa-close"></i>
+                                                                <i title="Não é possível realizar a triagem" class="fa fa-close"></i>
                                                             }
                                                         </td>
                                                         <td class="center">
@@ -89,12 +89,25 @@
                                                                     <i class="fa fa-angle-down"></i>
                                                                 </button>
                                                                 <ul class="dropdown-menu pull-left" role="menu">
-                                                                    <li>
-                                                                        <a href="@Url.Action("Create", "Prescricoes")"><i class="fa fa-clock-o"></i> Realizar marcação</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="javascript:;"><i class="fa fa-calendar"></i> Reagendar </a>
-                                                                    </li>
+                                                                    @if (marcacao.Estado == EstadoMarcacao.Paciente_Atendido)
+                                                                    {
+                                                                        <li>
+                                                                            <a href="@Url.Action("Details", "Marcacoes", new { @id = marcacao.ID})">
+                                                                                <i class="fa fa-clock-o"></i> Detalhes da marcação
+                                                                            </a>
+                                                                        </li>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li>
+                                                                            <a href="@Url.Action("Create", "Prescricoes", new { @id = marcacao.ID})">
+                                                                                <i class="fa fa-clock-o"></i> Realizar marcação
+                                                                            </a>
+                                                                        </li>
+                                                                    }
+                                                                    @*<li>
+                                                                            <a href="javascript:;"><i class="fa fa-calendar"></i> Reagendar </a>
+                                                                        </li>*@
                                                                     <li>
                                                                         <a href="javascript:;"><i class="fa fa-pencil"></i> Editar </a>
                                                                     </li>

@@ -1,66 +1,220 @@
 ﻿@model IE_Clinics.Models.Dominio.Marcacao
+@using IE_Clinics.Models.Dominio
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalhes da marcação";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Marcacao</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Medico.Departamento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Medico.Departamento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Paciente.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Paciente.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TipoMarcacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TipoMarcacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Data)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Data)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Duracao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Duracao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Observacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Observacao)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box border-gray">
+            <div class="user-bg">
+                <div class="overlay-box">
+                    <div class="user-content">
+                        <h4 class="text-white">Dados do paciente</h4>
+                        <h4 class="text-white">@ViewBag.Paciente.Nome</h4>
+                        <h5 class="text-white">@ViewBag.Paciente.Email</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="user-btm-box">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-primary"><i class="fa fa-phone"></i></p>
+                        <h6>Telefone</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.Telefone</b>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-success"><i class="fa fa-map"></i></p>
+                        <h6>Endereço</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.Endereco</b>
+                    </div>
+                    <div class="col-md-4 col-sm-4 text-center">
+                        <p class="text-danger"><i class="fa fa-clock-o"></i></p>
+                        <h6>Data de nascimento</h6> <b><i class="ti-mobile"></i> @ViewBag.Paciente.DataNascimento.ToShortDateString()</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="card card-topline-aqua">
+            <div class="card-head">
+                <header>Detalhes da marcação</header>
+            </div>
+            <div class="card-body ">
+                <div class="table-scrollable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="center"> Tipo de marcação </th>
+                                <th class="center"> Especialidade </th>
+                                <th class="center"> Data </th>
+                                <th class="center"> Horário </th>
+                                <th class="center"> Médico </th>
+                                <th class="center"> Estado </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd gradeX">
+                                <td class="center">@Model.TipoMarcacao</td>
+                                <td class="center">@Model.Especialidade</td>
+                                <td class="center">@Model.Data.ToShortDateString()</td>
+                                <td class="center">@Model.Data.ToShortTimeString() - @Model.Data.AddMinutes(45).ToShortTimeString()</td>
+                                <td class="center">@Model.Medico.Nome</td>
+                                <td class="center">
+                                    @if (Model.Estado == EstadoMarcacao.Agendado)
+                                    {
+                                        <button class="btn btn-xs btn-info no-margin">@Model.Estado</button>
+                                    }
+                                    else if (Model.Estado == EstadoMarcacao.Reagendado)
+                                    {
+                                        <button class="btn btn-xs btn-primary no-margin">@Model.Estado</button>
+                                    }
+                                    else if (Model.Estado == EstadoMarcacao.Aguardando_Atendimento)
+                                    {
+                                        <button class="btn btn-xs btn-warning no-margin">@Model.Estado</button>
+                                    }
+                                    else if (Model.Estado == EstadoMarcacao.Paciente_Atendido)
+                                    {
+                                        <button class="btn btn-xs btn-success no-margin">@Model.Estado</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-xs btn-danger no-margin">Paciente faltou</button>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-topline-green">
+            <div class="card-head">
+                <header>Triagem</header>
+            </div>
+            <div class="card-body ">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="center"> Peso </th>
+                            <th class="center"> Frequência Cardíaca </th>
+                            <th class="center"> Pressão arterial </th>
+                            <th class="center"> Temperatura </th>
+                            <th class="center"> Observações </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="odd gradeX">
+                            <td class="center">@ViewBag.Triagem.Peso kg</td>
+                            <td class="center">@ViewBag.Triagem.FrenquenciaCardiaca bpm</td>
+                            <td class="center">@ViewBag.Triagem.PressaoArterial mmHg</td>
+                            <td class="center">@ViewBag.Triagem.Temperatura ºC</td>
+                            <td class="center">@ViewBag.Triagem.Observacoes</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-topline-green">
+            <div class="card-head">
+                <header>Análise médica</header>
+            </div>
+            <div class="card-body center">
+                <h4>Indicação clínica</h4>
+                <p>@ViewBag.AnaliseMedica.IndicacaoClinica</p>
+                <h4>Exames</h4>
+                <span>@ViewBag.AnaliseMedica.Exames</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-topline-green">
+            <div class="card-head">
+                <header>Prescrição</header>
+            </div>
+            <div class="card-body center">
+                <h4>Medicamentos</h4>
+                <span>@{
+                    string medicamento = ViewBag.Prescricao.Medicamentos;
+                    //medicamento = medicamento.Replace("\n", "<br/>");
+                }</span>
+                <span>@medicamento</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>Marcacao</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Medico.Departamento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Medico.Departamento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Paciente.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Paciente.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TipoMarcacao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TipoMarcacao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Data)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Data)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Duracao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duracao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Observacao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Observacao)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

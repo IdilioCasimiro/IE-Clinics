@@ -29,7 +29,7 @@ namespace IE_Clinics.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Adicionar([Bind(Include = "ID,Nome,Descricao")] Especialidade especialidades)
+        public async Task<ActionResult> Adicionar([Bind(Include = "ID,Nome,Descricao, ValorMarcacao")] Especialidade especialidades)
         {
             if (ModelState.IsValid)
             {

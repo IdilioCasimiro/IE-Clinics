@@ -20,12 +20,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Marcacao.TipoMarcacao)
+            @Html.DisplayFor(modelItem => item.Medicamentos.Count)
+            @foreach(var i in item.Medicamentos)
+            {
+                <p>@i.ToString()</p>
+            }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.PrescricaoID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PrescricaoID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PrescricaoID })
         </td>
     </tr>
 }

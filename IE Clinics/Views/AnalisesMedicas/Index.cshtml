@@ -1,0 +1,45 @@
+﻿@model IEnumerable<IE_Clinics.Models.Dominio.AnaliseMedica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Marcacao.TipoMarcacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IndicacaoClinica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exames)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marcacao.TipoMarcacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IndicacaoClinica)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Exames)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AnaliseMedicaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AnaliseMedicaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AnaliseMedicaID })
+        </td>
+    </tr>
+}
+
+</table>

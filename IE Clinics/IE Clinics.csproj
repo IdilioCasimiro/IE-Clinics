@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Dominio\AnalisesMedicasController.cs" />
     <Compile Include="Controllers\Dominio\EspecialidadesController.cs" />
     <Compile Include="Controllers\Dominio\MarcacoesController.cs" />
     <Compile Include="Controllers\Dominio\MedicamentosController.cs" />
@@ -208,45 +209,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810172302149_InitialCreate.cs" />
-    <Compile Include="Migrations\201810172302149_InitialCreate.Designer.cs">
-      <DependentUpon>201810172302149_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181107485_Initial.cs" />
-    <Compile Include="Migrations\201810181107485_Initial.Designer.cs">
-      <DependentUpon>201810181107485_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181215049_ModeloPacienteUpdated.cs" />
-    <Compile Include="Migrations\201810181215049_ModeloPacienteUpdated.Designer.cs">
-      <DependentUpon>201810181215049_ModeloPacienteUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181220021_ModeloPacienteUpdated1.cs" />
-    <Compile Include="Migrations\201810181220021_ModeloPacienteUpdated1.Designer.cs">
-      <DependentUpon>201810181220021_ModeloPacienteUpdated1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181437502_ModeloMedicoAdicionado.cs" />
-    <Compile Include="Migrations\201810181437502_ModeloMedicoAdicionado.Designer.cs">
-      <DependentUpon>201810181437502_ModeloMedicoAdicionado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181725509_ModelMarcacaoAdicionado.cs" />
-    <Compile Include="Migrations\201810181725509_ModelMarcacaoAdicionado.Designer.cs">
-      <DependentUpon>201810181725509_ModelMarcacaoAdicionado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181753226_MarcacaoActualizado.cs" />
-    <Compile Include="Migrations\201810181753226_MarcacaoActualizado.Designer.cs">
-      <DependentUpon>201810181753226_MarcacaoActualizado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810181837261_DropCreateDB.cs" />
-    <Compile Include="Migrations\201810181837261_DropCreateDB.Designer.cs">
-      <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.cs" />
-    <Compile Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.Designer.cs">
-      <DependentUpon>201810201635340_ModelosDeAnaliseAdicionados.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810202242132_TriagemTerminada.cs" />
-    <Compile Include="Migrations\201810202242132_TriagemTerminada.Designer.cs">
-      <DependentUpon>201810202242132_TriagemTerminada.cs</DependentUpon>
+    <Compile Include="Migrations\201810251837038_Initial.cs" />
+    <Compile Include="Migrations\201810251837038_Initial.Designer.cs">
+      <DependentUpon>201810251837038_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Access Layer\Contexto.cs" />
@@ -399,7 +364,7 @@
     <Content Include="Img\datatable\Sorting icons.psd" />
     <None Include="packages.config" />
     <Content Include="Views\Pacientes\Index.cshtml" />
-    <Content Include="Views\Pacientes\Adicionar-Paciente.cshtml" />
+    <Content Include="Views\Pacientes\Adicionar.cshtml" />
     <Content Include="Views\Especialidades\Adicionar.cshtml" />
     <Content Include="Views\Especialidades\Delete.cshtml" />
     <Content Include="Views\Especialidades\Details.cshtml" />
@@ -432,37 +397,17 @@
     <Content Include="Views\Prescricoes\Details.cshtml" />
     <Content Include="Views\Prescricoes\Edit.cshtml" />
     <Content Include="Views\Prescricoes\Index.cshtml" />
+    <Content Include="Views\Pacientes\Create - Copy.cshtml" />
+    <Content Include="Views\Marcacoes\RealizarMarcacao.cshtml" />
+    <Content Include="Views\AnalisesMedicas\Create.cshtml" />
+    <Content Include="Views\AnalisesMedicas\Delete.cshtml" />
+    <Content Include="Views\AnalisesMedicas\Details.cshtml" />
+    <Content Include="Views\AnalisesMedicas\Edit.cshtml" />
+    <Content Include="Views\AnalisesMedicas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810172302149_InitialCreate.resx">
-      <DependentUpon>201810172302149_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181107485_Initial.resx">
-      <DependentUpon>201810181107485_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181215049_ModeloPacienteUpdated.resx">
-      <DependentUpon>201810181215049_ModeloPacienteUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181220021_ModeloPacienteUpdated1.resx">
-      <DependentUpon>201810181220021_ModeloPacienteUpdated1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181437502_ModeloMedicoAdicionado.resx">
-      <DependentUpon>201810181437502_ModeloMedicoAdicionado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181725509_ModelMarcacaoAdicionado.resx">
-      <DependentUpon>201810181725509_ModelMarcacaoAdicionado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181753226_MarcacaoActualizado.resx">
-      <DependentUpon>201810181753226_MarcacaoActualizado.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810181837261_DropCreateDB.resx">
-      <DependentUpon>201810181837261_DropCreateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810201635340_ModelosDeAnaliseAdicionados.resx">
-      <DependentUpon>201810201635340_ModelosDeAnaliseAdicionados.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810202242132_TriagemTerminada.resx">
-      <DependentUpon>201810202242132_TriagemTerminada.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810251837038_Initial.resx">
+      <DependentUpon>201810251837038_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

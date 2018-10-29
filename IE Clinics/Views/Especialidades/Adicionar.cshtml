@@ -46,7 +46,16 @@
                                 @Html.ValidationMessageFor(model => model.Descricao)
                             </div>
                         </div>
-                        
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">
+                                Valor marcacao
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.ValorMarcacao, new { @placeholder = "Valor da marcação", @class = "form-control input-height" })
+                                @Html.ValidationMessageFor(model => model.ValorMarcacao)
+                            </div>
+                        </div>
 
                         <div class="form-actions">
                             <div class="row">

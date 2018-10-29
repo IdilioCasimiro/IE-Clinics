@@ -8,11 +8,14 @@ namespace IE_Clinics.Models.Dominio
 {
     public class Exame
     {
-        public int ID { get; set; }
+        public int ExameID { get; set; }
         [Required(ErrorMessage = "Campo obrigatório")]
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         public int Valor { get; set; }
+
+        public List<AnaliseMedica> AnalisesMedicas { get; set; }
+
     }
 }

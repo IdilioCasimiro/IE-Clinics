@@ -29,11 +29,16 @@ namespace IE_Clinics.Controllers.Dominio
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Marcacao marcacao = await db.Marcacoes.FindAsync(id);
+            Marcacao marcacao = db.Marcacoes.Include(p => p.Medico).Where(p => p.ID == id).FirstOrDefault();
             if (marcacao == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Paciente = await db.Pacientes.FindAsync(marcacao.PacienteID);
+            ViewBag.Triagem = db.Triagens.Where(p => p.ID == id).OrderByDescending(p => p.ID).FirstOrDefault();
+            ViewBag.Prescricao = db.Prescricoes.Where(p => p.PrescricaoID == id).OrderByDescending(p => p.PrescricaoID).FirstOrDefault();
+            ViewBag.AnaliseMedica = db.AnaliseMedicas.Where(p => p.AnaliseMedicaID == id).OrderByDescending(p => p.AnaliseMedicaID).FirstOrDefault();
+
             return View(marcacao);
         }
 

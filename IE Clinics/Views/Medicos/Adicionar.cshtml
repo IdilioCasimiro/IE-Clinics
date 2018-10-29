@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <div class="card-body" id="bar-parent">
-                @using (Html.BeginForm("Adicionar", "Medico", FormMethod.Post, new { @id = "form_sample_1", @class = "form-horizontal" }))
+                @using (Html.BeginForm("Adicionar", "Medicos", FormMethod.Post, new { @id = "form_sample_1", @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

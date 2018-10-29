@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity;
 using System.Globalization;
+using System.Linq;
 
 namespace IE_Clinics.Models.Access_Layer
 {
@@ -25,7 +26,41 @@ namespace IE_Clinics.Models.Access_Layer
                 TelefoneAlternativo = "918014107"
             };
 
+            Especialidade especialidade = new Especialidade()
+            {
+                Nome = "Cardiologia",
+                Descricao = "Descrição",
+                ValorMarcacao = 10250
+            };
+
+            contexto.Especialidades.Add(especialidade);
+            contexto.SaveChanges();
+
+            Medico medico = new Medico()
+            {
+                Nome = "Edson Chinendele",
+                DataNascimento = DateTime.Parse("01/02/1994", cultureInfo),
+                Sexo = Sexo.M,
+                Pais = "Angola",
+                Provincia = "Luanda",
+                Endereco = "Zango 0",
+                Email = "edsonchinendele@ichostweb.com",
+                GrupoSanguineo = "A+",
+                Telefone = "944446278",
+                TelefoneAlternativo = "918014107",
+                EspecialidadeID = contexto.Especialidades.FirstOrDefault().ID
+            };
+
+            Medicamento medicamento = new Medicamento()
+            {
+                Nome = "Omeprazol",
+                Descricao = "56un"
+            };
+
             contexto.Pacientes.Add(paciente);
+            contexto.Medicos.Add(medico);
+            contexto.Medicamentos.Add(medicamento);
+
             contexto.SaveChanges();
             base.Seed(contexto);
         }

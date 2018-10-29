@@ -9,7 +9,7 @@ namespace IE_Clinics.Models.Dominio
 {
     public class Medicamento
     {
-        public int ID { get; set; }
+        public int MedicamentoID { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
         public string Nome { get; set; }
