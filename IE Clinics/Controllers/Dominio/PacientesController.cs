@@ -22,7 +22,8 @@ namespace IE_Clinics.Controllers
 
         public String Teste()
         {
-            return "";
+            var texto = "";
+            return texto;
         }
         
         public ActionResult Adicionar()
