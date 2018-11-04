@@ -19,6 +19,11 @@ namespace IE_Clinics.Controllers
             var pacientes = await contexto.Pacientes.ToListAsync();
             return View(pacientes);
         }
+
+        public String Teste()
+        {
+            return "";
+        }
         
         public ActionResult Adicionar()
         {
