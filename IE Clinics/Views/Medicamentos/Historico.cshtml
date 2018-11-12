@@ -1,7 +1,6 @@
-﻿@model IEnumerable<IE_Clinics.Models.Dominio.Medico>
-
+﻿@model IEnumerable<IE_Clinics.Models.Dominio.Venda>
 @{
-    ViewBag.Title = "Médicos";
+    ViewBag.Title = "Histórico de vendas";
 }
 
 <div class="row">
@@ -24,8 +23,8 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 col-xs-6">
                                             <div class="btn-group">
-                                                <a href="@Url.Action("Adicionar", "Medicos", new { area = ""})" id="addRow" class="btn btn-info">
-                                                    Adicionar médico <i class="fa fa-plus"></i>
+                                                <a href="@Url.Action("Index", "Medicamentos", new { area = ""})" id="addRow" class="btn btn-info">
+                                                    Lista de fármacos <i class="fa fa-eye"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -58,34 +57,30 @@
                                     <div class="table-scrollable">
                                         <table class="table table-hover table-checkable order-column full-width" id="example4">
                                             <thead>
-                                                <tr>
-                                                    <th> Nome </th>
-                                                    <th class="center"> Sexo </th>
-                                                    <th class="center"> D. Nascimento </th>
-                                                    <th class="center"> Email </th>
-                                                    <th class="center"> Telefone </th>
-                                                    <th class="center">Especialidade</th>
-                                                    <th class="center"> Acções </th>
+                                                <tr class="center">
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.NomeCliente)
+                                                    </th>
+                                                    <th>
+                                                        Fármaco
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Quantidade)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.ValorTotal)
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var medico in Model)
+                                                @foreach (var venda in Model)
                                                 {
-                                                    <tr class="odd gradeX">
-                                                        <td>@medico.Nome</td>
-                                                        <td class="center">@medico.Sexo</td>
-                                                        <td class="center">@medico.DataNascimento.ToShortDateString()</td>
-                                                        <td class="center">@medico.Email</td>
-                                                        <td class="center">@medico.Telefone</td>
-                                                        <td class="center">@medico.Especialidade.Nome</td>
-                                                        <td>
-                                                            <a href="@Url.Action("Edit", "Medicos", new { area = "", id = medico.ID })" class="btn btn-primary btn-xs">
-                                                                <i class="fa fa-pencil"></i>
-                                                            </a>
-                                                            <a href="@Url.Action("Details", "Medicos", new { area = "", id = medico.ID  })" class="btn btn-danger btn-xs">
-                                                                <i class="fa fa-eye"></i>
-                                                            </a>
-                                                        </td>
+                                                    <tr class="odd gradeX center">
+                                                        <td>@venda.NomeCliente</td>
+                                                        <td>@venda.Farmaco</td>
+                                                        <td class="center">@venda.Quantidade</td>
+                                                        <td>@venda.ValorTotal kz</td>
+                                                        
                                                     </tr>
                                                 }
                                             </tbody>
@@ -100,3 +95,4 @@
         </div>
     </div>
 </div>
+

@@ -199,13 +199,13 @@
     <Compile Include="Controllers\Dominio\EspecialidadesController.cs" />
     <Compile Include="Controllers\Dominio\MarcacoesController.cs" />
     <Compile Include="Controllers\Dominio\MedicamentosController.cs" />
+    <Compile Include="Controllers\Dominio\PacientesController.cs" />
     <Compile Include="Controllers\Dominio\PrescricoesController.cs" />
     <Compile Include="Controllers\Dominio\TriagensController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Dominio\MedicosController.cs" />
-    <Compile Include="Controllers\Dominio\PacientesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,6 +228,7 @@
     <Compile Include="Models\Dominio\Medico.cs" />
     <Compile Include="Models\Dominio\Paciente.cs" />
     <Compile Include="Models\Dominio\Pessoa.cs" />
+    <Compile Include="Models\Dominio\Venda.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -363,8 +364,6 @@
   <ItemGroup>
     <Content Include="Img\datatable\Sorting icons.psd" />
     <None Include="packages.config" />
-    <Content Include="Views\Pacientes\Index.cshtml" />
-    <Content Include="Views\Pacientes\Adicionar.cshtml" />
     <Content Include="Views\Especialidades\Adicionar.cshtml" />
     <Content Include="Views\Especialidades\Delete.cshtml" />
     <Content Include="Views\Especialidades\Details.cshtml" />
@@ -397,13 +396,19 @@
     <Content Include="Views\Prescricoes\Details.cshtml" />
     <Content Include="Views\Prescricoes\Edit.cshtml" />
     <Content Include="Views\Prescricoes\Index.cshtml" />
-    <Content Include="Views\Pacientes\Create - Copy.cshtml" />
     <Content Include="Views\Marcacoes\RealizarMarcacao.cshtml" />
     <Content Include="Views\AnalisesMedicas\Create.cshtml" />
     <Content Include="Views\AnalisesMedicas\Delete.cshtml" />
     <Content Include="Views\AnalisesMedicas\Details.cshtml" />
     <Content Include="Views\AnalisesMedicas\Edit.cshtml" />
     <Content Include="Views\AnalisesMedicas\Index.cshtml" />
+    <Content Include="Views\Pacientes\Create.cshtml" />
+    <Content Include="Views\Pacientes\Delete.cshtml" />
+    <Content Include="Views\Pacientes\Details.cshtml" />
+    <Content Include="Views\Pacientes\Edit.cshtml" />
+    <Content Include="Views\Pacientes\Index.cshtml" />
+    <Content Include="Views\Medicamentos\EfectuarVenda.cshtml" />
+    <Content Include="Views\Medicamentos\Historico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810251837038_Initial.resx">

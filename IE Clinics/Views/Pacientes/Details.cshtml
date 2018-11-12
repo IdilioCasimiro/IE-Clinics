@@ -1,10 +1,8 @@
-﻿@model IE_Clinics.Models.Dominio.Medico
+﻿@model IE_Clinics.Models.Dominio.Paciente
 
 @{
-    ViewBag.Title = "";
+    ViewBag.Title = "Detalhes do paciente";
 }
-
-<a class="btn btn-default" href="@Url.Action("Index")">Voltar</a>
 
 <div class="row">
     <div class="col-sm-12">
@@ -12,7 +10,7 @@
             <div class="user-bg">
                 <div class="overlay-box">
                     <div class="user-content">
-                        <h4 class="text-white">Detalhes do médico</h4>
+                        <h4 class="text-white">Detalhes do paciente</h4>
                         <h4 class="text-white">@Model.Nome</h4>
                         <h5 class="text-white">@Model.Email</h5>
                     </div>
@@ -58,13 +56,9 @@
                         <p class="text-danger"><i class="fa fa-clock-o"></i></p>
                         <h6>Grupo sanguíneo</h6> <b><i class="ti-mobile"></i> @Model.GrupoSanguineo</b>
                     </div>
-                    <div class="col-md-4 col-sm-4 text-center">
-                        <p class="text-danger"><i class="fa fa-clock-o"></i></p>
-                        <h6>Especialidade</h6> <b><i class="ti-mobile"></i> @Model.Especialidade.Nome</b>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
 </div>

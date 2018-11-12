@@ -11,7 +11,7 @@ namespace IE_Clinics.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Pacientes");
         }
 
         public ActionResult Pacientes()

@@ -1,45 +1,78 @@
-﻿@model IE_Clinics.Models.Dominio.Especialidades
+﻿@model IE_Clinics.Models.Dominio.Especialidade
 
 @{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Especialidades</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    ViewBag.Title = "Editar especialidade";
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default" })
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="card card-box">
+            <div class="card-head">
+                <header>Formulário</header>
+                <button id="panel-button"
+                        class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                        data-upgraded=",MaterialButton">
+                    <i class="material-icons">more_vert</i>
+                </button>
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                    data-mdl-for="panel-button">
+                    <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action</li>
+                    <li class="mdl-menu__item"><i class="material-icons">print</i>Another action</li>
+                    <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else here</li>
+                </ul>
+            </div>
+            <div class="card-body" id="bar-parent">
+                @using (Html.BeginForm("Edit", "Especialidades", FormMethod.Post, new { @id = "form_sample_1", @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-body">
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">
+                                Nome da especialidade
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.Nome, new { @placeholder = "Nome da especialidade", @class = "form-control input-height" })
+                                @Html.ValidationMessageFor(model => model.Nome)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">
+                                Descrição
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                @Html.TextAreaFor(model => model.Descricao, new { @placeholder = "Descrição", @class = "form-control input-height" })
+                                @Html.ValidationMessageFor(model => model.Descricao)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-3">
+                                Valor marcacao
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(model => model.ValorMarcacao, new { @placeholder = "Valor da marcação", @class = "form-control input-height" })
+                                @Html.ValidationMessageFor(model => model.ValorMarcacao)
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="offset-md-3 col-md-9">
+                                    <button type="submit" class="btn btn-info m-r-20">Salvar</button>
+                                    <a href="@Url.Action("Index", "Especialidades", new { area = "" })" class="btn btn-default">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
