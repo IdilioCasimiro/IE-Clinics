@@ -1,51 +1,118 @@
 ﻿@model IEnumerable<IE_Clinics.Models.Dominio.Medicamento>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Fármacos";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descricao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantidade)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Valor)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantidade)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MedicamentoID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MedicamentoID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MedicamentoID })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable-line">
+            <div class="tab-content">
+                <div class="tab-pane active fontawesome-demo" id="tab1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card card-topline-red">
+                                <div class="card-head">
+                                    <header></header>
+                                    <div class="tools">
+                                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                        @*<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                                            <a class="t-close btn-color fa fa-times" href="javascript:;"></a>*@
+                                    </div>
+                                </div>
+                                <div class="card-body ">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="btn-group">
+                                                <a href="@Url.Action("Create", "Medicamentos", new { area = ""})" id="addRow" class="btn btn-info">
+                                                    Adicionar fármaco <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6">
+                                            <div class="btn-group pull-right">
+                                                <a class="btn deepPink-bgcolor  btn-outline dropdown-toggle" data-toggle="dropdown">
+                                                    Tools
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <i class="fa fa-print"></i> Print
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <i class="fa fa-file-pdf-o"></i> Save as PDF
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:;">
+                                                            <i class="fa fa-file-excel-o"></i> Export to Excel
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-scrollable">
+                                        <table class="table table-hover table-checkable order-column full-width" id="example4">
+                                            <thead>
+                                                <tr class="center">
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Nome)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Descricao)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Quantidade)
+                                                    </th>
+                                                    <th>
+                                                        @Html.DisplayNameFor(model => model.Valor)
+                                                    </th>
+                                                    <th>Acções</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var especialidade in Model)
+                                                {
+                                                    <tr class="odd gradeX">
+                                                        <td>@especialidade.Nome</td>
+                                                        <td>@especialidade.Descricao</td>
+                                                        <td class="center">@especialidade.Quantidade</td>
+                                                        <td>@especialidade.Valor kz</td>
+                                                        <td class="center">
+                                                            <a href="@Url.Action("Edit", "Medicamentos", new { id = especialidade.MedicamentoID})" class="btn btn-primary btn-xs" title="Editar">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            @if (especialidade.Quantidade != 0)
+                                                            {
+                                                                <a href="@Url.Action("EfectuarVenda", "Medicamentos", new { id = especialidade.MedicamentoID })" class="btn btn-warning btn-xs" title="Efectuar venda">
+                                                                    <i class="fa fa-check"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p class="btn btn-default btn-xs" title="Não é possível efectuar venda">
+                                                                    <i class="fa fa-close"></i>
+                                                                </p>
+                                                            }
+                                                            @*<a href="@Url.Action("Edit", "Medicamentos", new { id = especialidade.MedicamentoID})" class="btn btn-success btn-xs" title="Acrescentar">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a>*@
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

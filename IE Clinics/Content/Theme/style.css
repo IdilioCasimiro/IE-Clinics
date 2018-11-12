@@ -908,3 +908,8 @@ tr.group:hover {
 .mega-menu-dropdown .dropdown-toggle {
     line-height: 24px;
 }
+
+.deepPink-bgcolor,
+.material-icons {
+    display: none;
+}

@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
-
+    
 namespace IE_Clinics.Models.Access_Layer
 {
     public class Contexto : DbContext
@@ -25,6 +25,7 @@ namespace IE_Clinics.Models.Access_Layer
         public DbSet<Prescricao> Prescricoes { get; set; }
         public DbSet<Exame> Exames { get; set; }
         public DbSet<Medicamento> Medicamentos { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

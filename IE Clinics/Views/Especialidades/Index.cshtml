@@ -72,18 +72,18 @@
                                                     <td>@especialidade.Nome</td>
                                                     <td>@especialidade.Descricao</td>
                                                     <td>@especialidade.ValorMarcacao kz</td>
-                                                    <td>
-                                                        <a href="edit_patient.html" class="btn btn-primary btn-xs">
+                                                    <td class="center">
+                                                        <a href="@Url.Action("Edit", "Especialidades", new { id = especialidade.ID})" class="btn btn-primary btn-xs">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        @using (Html.BeginForm("Delete", "Especialidades", FormMethod.Post))
+                                                        @*@using (Html.BeginForm("Delete", "Especialidades", FormMethod.Post))
                                                         {
                                                             @Html.AntiForgeryToken()
                                                             @Html.Hidden("ID", especialidade.ID)
                                                             <button type="submit" class="btn btn-danger btn-xs">
                                                                 <i class="fa fa-trash-o "></i>
                                                             </button>
-                                                        }
+                                                        }*@
                                                     </td>
                                                 </tr>
                                                 }

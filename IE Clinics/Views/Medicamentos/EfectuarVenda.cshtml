@@ -1,7 +1,6 @@
-﻿@model IE_Clinics.Models.Dominio.Medicamento
-
+﻿@model IE_Clinics.Models.Dominio.Venda
 @{
-    ViewBag.Title = "Editar fármaco";
+    ViewBag.Title = "Efectuar venda";
 }
 
 <div class="row">
@@ -22,29 +21,20 @@
                 </ul>
             </div>
             <div class="card-body" id="bar-parent">
-                @using (Html.BeginForm("Edit", "Medicamentos", FormMethod.Post, new { @id = "form_sample_1", @class = "form-horizontal" }))
+                @using (Html.BeginForm("EfectuarVenda", "Medicamentos", FormMethod.Post, new { @id = "form_sample_1", @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-body">
+                        <input type="hidden" name="MedicamentoID" value="@ViewBag.MedicamentoID" />
                         <div class="form-group row">
                             <label class="control-label col-md-3">
-                                Nome
+                                Nome do cliente
                                 <span class="required"> * </span>
                             </label>
                             <div class="col-md-5">
-                                @Html.TextBoxFor(model => model.Nome, new { @placeholder = "Nome do fármaco", @class = "form-control input-height" })
-                                @Html.ValidationMessageFor(model => model.Nome)
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-3">
-                                Descrição
-                                <span class="required"> * </span>
-                            </label>
-                            <div class="col-md-5">
-                                @Html.TextAreaFor(model => model.Descricao, new { @placeholder = "Descrição", @class = "form-control input-height" })
-                                @Html.ValidationMessageFor(model => model.Descricao)
+                                @Html.TextBoxFor(model => model.NomeCliente, new { @placeholder = "Nome do cliente", @class = "form-control input-height" })
+                                @Html.ValidationMessageFor(model => model.NomeCliente)
                             </div>
                         </div>
                         <div class="form-group row">
@@ -53,18 +43,8 @@
                                 <span class="required"> * </span>
                             </label>
                             <div class="col-md-5">
-                                @Html.TextBoxFor(model => model.Quantidade, new { @placeholder = "Quantidade", @class = "form-control input-height" })
+                                @Html.TextAreaFor(model => model.Quantidade, new { @placeholder = "Quantidade", @class = "form-control input-height" })
                                 @Html.ValidationMessageFor(model => model.Quantidade)
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-md-3">
-                                Valor
-                                <span class="required"> * </span>
-                            </label>
-                            <div class="col-md-5">
-                                @Html.TextBoxFor(model => model.Valor, new { @placeholder = "Valor", @class = "form-control input-height" })
-                                @Html.ValidationMessageFor(model => model.Valor)
                             </div>
                         </div>
 
@@ -82,3 +62,4 @@
         </div>
     </div>
 </div>
+

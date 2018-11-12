@@ -80,7 +80,7 @@ namespace IE_Clinics.Controllers.Dominio
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Nome,Descricao,Quantidade,Valor")] Medicamento medicamento)
+        public async Task<ActionResult> Edit([Bind(Include = "MedicamentoID,Nome,Descricao,Quantidade,Valor")] Medicamento medicamento)
         {
             if (ModelState.IsValid)
             {
@@ -115,6 +115,38 @@ namespace IE_Clinics.Controllers.Dominio
             db.Medicamentos.Remove(medicamento);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult EfectuarVenda(int? id)
+        {
+            ViewBag.MedicamentoID = id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EfectuarVenda(int medicamentoID, [Bind(Include = "NomeCliente, Quantidade")] Venda venda)
+        {
+            var medicamento = db.Medicamentos.Find(medicamentoID);
+            venda.ValorTotal = venda.Quantidade * medicamento.Valor;
+            venda.Farmaco = medicamento.Nome;
+
+            if (ModelState.IsValid)
+            {
+                db.Vendas.Add(venda);
+                await db.SaveChangesAsync();
+
+                medicamento.Quantidade -= venda.Quantidade;
+                db.Entry(medicamento).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public async Task<ActionResult> Historico()
+        {
+            var vendas = await db.Vendas.ToListAsync();
+            return View(vendas);
         }
 
         protected override void Dispose(bool disposing)

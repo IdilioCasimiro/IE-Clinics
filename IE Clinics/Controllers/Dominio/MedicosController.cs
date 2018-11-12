@@ -30,7 +30,7 @@ namespace IE_Clinics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Medico medico = db.Medicos.Find(id);
+            Medico medico = db.Medicos.Include(m => m.Especialidade).Where(m => m.ID == id).FirstOrDefault();
             if (medico == null)
             {
                 return HttpNotFound();
